@@ -1,0 +1,27 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+// it is wery usefull 
+// any of the script that enharets from the PickUp needs to implement a pickmeUp method
+public abstract class PickUp : MonoBehaviour
+{
+
+    public float fallSpeed;
+
+    // Update is called once per frame
+    void Update()
+    {
+        transform.Translate(Vector2.down * Time.deltaTime * fallSpeed);
+    }
+
+    public abstract void PickMeUp();
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            PickMeUp();
+        }
+    }
+}
